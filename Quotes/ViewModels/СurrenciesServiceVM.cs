@@ -1,17 +1,18 @@
-﻿using System;
+﻿using Quotes.Services;
+using System;
 using System.Windows;
-using static Quotes.СurrenciesServiceModel;
+using static Quotes.Services.СurrenciesService;
 
-namespace Quotes
+namespace Quotes.ViewModels
 {
     internal class СurrenciesServiceVM : СurrenciesServiceVMDataDesigner
     {
-        private СurrenciesServiceModel model;
+        private СurrenciesService model;
         bool blockViewModelUpdates;
 
         public СurrenciesServiceVM()
         {
-            model = new СurrenciesServiceModel();
+            model = new СurrenciesService();
             model.СurrenciesInitialized += model.СurrenciesInitizalized;
             model.OutputJson();
             ListCurrency = model.ListСurrencies;

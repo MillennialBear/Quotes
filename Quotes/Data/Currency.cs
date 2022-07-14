@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Quotes
+namespace Quotes.Data
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Currency
