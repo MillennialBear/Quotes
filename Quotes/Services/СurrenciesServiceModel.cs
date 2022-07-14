@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
-namespace Quotes
+namespace Quotes.Services
 {
-    public class СurrenciesServiceModel
+    public class СurrenciesService
     {
         public Dictionary<string, Currency> DictСurrencies { get; private set; } = new Dictionary<string, Currency>();
         public event EventHandler<Dictionary<string, Currency>> СurrenciesInitialized;
@@ -47,7 +47,7 @@ namespace Quotes
                     Previous = currencyPair.Value.Previous
                 }).ToList();
         }
-        
+
         decimal rateCurrencyFrom = 0;
         decimal rateCurrencyTo = 0;
         decimal nominalCurrencyFrom = 0;
@@ -75,7 +75,7 @@ namespace Quotes
         {
             if (rateCurrencyTo == 0)
                 return 0;
-            return (Math.Round((rateCurrencyFrom / nominalCurrencyFrom) / (rateCurrencyTo / nominalCurrencyTo) * amount, 4, MidpointRounding.AwayFromZero));
+            return Math.Round(rateCurrencyFrom / nominalCurrencyFrom / (rateCurrencyTo / nominalCurrencyTo) * amount, 4, MidpointRounding.AwayFromZero);
         }
 
         public decimal ConvertCurrencyTo(decimal amount)
@@ -83,12 +83,12 @@ namespace Quotes
             if (rateCurrencyFrom == 0)
                 return 0;
             else
-                return (Math.Round((rateCurrencyTo / nominalCurrencyTo) / (rateCurrencyFrom / nominalCurrencyFrom) * amount, 4, MidpointRounding.AwayFromZero));
+                return Math.Round(rateCurrencyTo / nominalCurrencyTo / (rateCurrencyFrom / nominalCurrencyFrom) * amount, 4, MidpointRounding.AwayFromZero);
         }
 
         public SearchResult SearchCode(string searchString)
-        {            
-            decimal valueRateUSDToRUB = ListСurrencies.FirstOrDefault(x => x.CurrencyKey == "USD").Value;            
+        {
+            decimal valueRateUSDToRUB = ListСurrencies.FirstOrDefault(x => x.CurrencyKey == "USD").Value;
             foreach (var currency in ListСurrencies)
             {
                 if (searchString != null)
@@ -124,7 +124,7 @@ namespace Quotes
             public decimal ValueRateToUSD;
             public string NameOfCurrency;
         }
-                
+
         public enum ResultType
         {
             ExactMatch,
