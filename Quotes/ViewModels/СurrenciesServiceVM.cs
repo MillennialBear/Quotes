@@ -1,5 +1,6 @@
 ﻿using Quotes.Services;
 using System;
+using System.Linq;
 using System.Windows;
 using static Quotes.Services.СurrenciesService;
 
@@ -13,9 +14,14 @@ namespace Quotes.ViewModels
         public СurrenciesServiceVM()
         {
             model = new СurrenciesService();
-            model.СurrenciesInitialized += model.СurrenciesInitizalized;
+            model.СurrenciesInitialized += OnСurrenciesInitialized;
             model.OutputJson();
             ListCurrency = model.ListСurrencies;
+        }
+
+        private void OnСurrenciesInitialized(object? sender, System.Collections.Generic.Dictionary<string, Data.Currency> e)
+        {
+            ListCurrency = e.Values.ToList();
         }
 
         public override void OnSearch(object Value = null)
