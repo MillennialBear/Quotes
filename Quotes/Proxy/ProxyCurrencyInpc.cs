@@ -1,6 +1,7 @@
-﻿using System.ComponentModel;
+﻿using Quotes.Mvvm;
+using System.ComponentModel;
 
-namespace Quotes
+namespace Quotes.Proxy
 {
     internal class ProxyCurrencyInpc<Currency> : OnPropertyChangedClass
     {

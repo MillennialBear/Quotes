@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace Quotes
+namespace Quotes.Mvvm
 {
     public class OnPropertyChangedClass : INotifyPropertyChanged
     {
@@ -48,7 +48,7 @@ namespace Quotes
         /// <param name="propertyName">Название свойства</param>
         protected virtual void SetProperty<T>(ref T fieldProperty, T newValue, [CallerMemberName] string propertyName = "")
         {
-            if ((fieldProperty != null && !fieldProperty.Equals(newValue)) || (fieldProperty == null && newValue != null))
+            if (fieldProperty != null && !fieldProperty.Equals(newValue) || fieldProperty == null && newValue != null)
                 PropertyNewValue(ref fieldProperty, newValue, propertyName);
         }
 

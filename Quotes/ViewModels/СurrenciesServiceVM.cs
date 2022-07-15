@@ -1,20 +1,27 @@
-﻿using System;
+﻿using Quotes.Services;
+using System;
+using System.Linq;
 using System.Windows;
-using static Quotes.СurrenciesServiceModel;
+using static Quotes.Services.СurrenciesService;
 
-namespace Quotes
+namespace Quotes.ViewModels
 {
     internal class СurrenciesServiceVM : СurrenciesServiceVMDataDesigner
     {
-        private СurrenciesServiceModel model;
+        private СurrenciesService model;
         bool blockViewModelUpdates;
 
         public СurrenciesServiceVM()
         {
-            model = new СurrenciesServiceModel();
-            model.СurrenciesInitialized += model.СurrenciesInitizalized;
+            model = new СurrenciesService();
+            model.СurrenciesInitialized += OnСurrenciesInitialized;
             model.OutputJson();
             ListCurrency = model.ListСurrencies;
+        }
+
+        private void OnСurrenciesInitialized(object? sender, System.Collections.Generic.Dictionary<string, Data.Currency> e)
+        {
+            ListCurrency = e.Values.ToList();
         }
 
         public override void OnSearch(object Value = null)
