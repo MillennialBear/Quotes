@@ -15,7 +15,7 @@ namespace Quotes
         /// <summary>Модель</summary>
         private IQuotesModel model;
         /// <summary>ViewModel</summary>
-        private MainViewModel viewModel;
+        private QuotesVM viewModel;
         /// <summary>Главное окно</summary>
         private Window mainWindow;
 
@@ -23,7 +23,7 @@ namespace Quotes
         {
             model = new QuotesModelJSON();
             model = model ?? throw new ArgumentNullException(nameof(model));
-            viewModel = new MainViewModel(model);
+            viewModel = new QuotesVM(model);
             viewModel.ExceptionEvent += ShowException;
 
             mainWindow = new Window()

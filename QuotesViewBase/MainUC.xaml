@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:QuotesViewBase"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:quotesvmlib="clr-namespace:QuotesViewModelBase;assembly=QuotesViewModelBase"
-    d:DataContext="{x:Type quotesvmbase:QuotesViewModelDD}"
+    xmlns:quotesvmbase="clr-namespace:QuotesViewModelBase;assembly=QuotesViewModelBase"
+    d:DataContext="{x:Type quotesvmbase:QuotesVMDD}"
     d:MinHeight="400"
     d:MinWidth="700"
     mc:Ignorable="d">

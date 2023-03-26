@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace QuotesViewModel
 {
-    public partial class MainViewModel : QuotesViewModelDD
+    public partial class QuotesVM : QuotesVMDD
     {
         /// <summary>Блокировка обновления ViewModel</summary>   
         bool blockViewModelUpdates;

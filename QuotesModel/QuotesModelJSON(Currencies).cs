@@ -40,18 +40,21 @@ namespace QuotesModel
         protected override SearchResult SearchCode(string searchString)
         {            
             decimal valueRateUSDToRUB = currenciesDTO.FirstOrDefault(x => x.CurrencyKey == "USD").Value;
-            foreach (var currency in currenciesDTO)
+            if (!string.IsNullOrEmpty(searchString))
             {
-                if (searchString != null & currency.CurrencyKey.Contains(searchString.ToUpper()))
+                foreach (var currency in currenciesDTO)
                 {
-                    return new SearchResult
+                    if (currency.CurrencyKey.Contains(searchString.ToUpper()))
                     {
-                        Type = ResultType.ExactMatch,
-                        NameOfCurrency = currency.Name,
-                        NominalOfCurrency = currency.Nominal,
-                        ValueRateToRUB = currency.Value,
-                        ValueRateToUSD = Math.Round(currency.Value / valueRateUSDToRUB, 4, MidpointRounding.AwayFromZero)
-                    };
+                        return new SearchResult
+                        {
+                            Type = ResultType.ExactMatch,
+                            NameOfCurrency = currency.Name,
+                            NominalOfCurrency = currency.Nominal,
+                            ValueRateToRUB = currency.Value,
+                            ValueRateToUSD = Math.Round(currency.Value / valueRateUSDToRUB, 4, MidpointRounding.AwayFromZero)
+                        };
+                    }
                 }
             }
 

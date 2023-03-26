@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace QuotesViewModelBase
 {
-    public class QuotesViewModelDD : OnPropertyChangedClass, IQuotesViewModel
+    public class QuotesVMDD : OnPropertyChangedClass, IQuotesViewModel
     {
         #region Поля для хранения значений свойств
         private ICurrencyVM selectCurrencyFrom;
