@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\QuotesModelBase\QuotesModelBase.csproj" />
+    <ProjectReference Include="..\QuotesModel\QuotesModel.csproj" />
+    <ProjectReference Include="..\QuotesViewBase\QuotesViewBase.csproj" />
+    <ProjectReference Include="..\QuotesViewModelBase\QuotesViewModelBase.csproj" />
+    <ProjectReference Include="..\QuotesViewModel\QuotesViewModel.csproj" />
+  </ItemGroup>
+
+</Project>
