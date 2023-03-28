@@ -18,13 +18,13 @@ namespace QuotesViewModel
         /// <param name="sender">Источник события</param>
         /// <param name="action">Действие события</param>
         /// <param name="currencies">Валюты затронутые событием</param>
-        private void Model_ChangedCurrencies(object sender, ActionChanged action, ImmutableHashSet<CurrencyDto> currencies)
+        private void Model_ChangedCurrencies(object sender, ActionChanged action, List<CurrencyDto> currencies)
         {
             switch (action)
             {
                 case ActionChanged.Updated:
-                    if(currencies.Any())
-                        ChangingCurrencies(currencies.ToHashSet());
+                    if(currencies.Any())                        
+                        ChangingCurrencies(currencies);                    
                     break;                                    
                 default:
                     throw new ArgumentException(null, nameof(action));
@@ -32,25 +32,20 @@ namespace QuotesViewModel
         }
 
         /// <summary>Изменение Валют</summary>
-        /// <param name="state">Изменяемые Валюты</param>
-        private void ChangingCurrencies(object state)
-        {
-            /// Получение коллекции из параметра
-            HashSet<CurrencyDto> currencies = (HashSet<CurrencyDto>)state;            
-
+        /// <param name="currencies">Изменяемые Валюты</param>
+        private void ChangingCurrencies(List<CurrencyDto> currencies)
+        {            
             /// Создание коллекции изменяемых Валют
             Dictionary<CurrencyDto, CurrencyVM> list = new Dictionary<CurrencyDto, CurrencyVM>(currencies.Count);
 
-            foreach (var curr in currencies.ToArray())
+            foreach (var curr in currencies)
             {                
                 CurrencyVM cur = (CurrencyVM)Currencies.FirstOrDefault(d => d.CurrencyKey == curr.CurrencyKey);
-                if (cur != null)
+                if(!cur.EqualValues(curr))
                 {
                     /// Создание новой пары Данные и Валюта для изменения в коллекции
                     list.Add(curr, cur);
-                    /// Удаление валют из полученной коллекции
-                    currencies.Remove(curr);
-                }
+                }               
             }
 
             /// Если в добавляемой коллекции есть элементы
@@ -66,15 +61,15 @@ namespace QuotesViewModel
                 foreach (var currency in currencies)
                     currency.Value.CopyFromDTO(currency.Key);
 
-            DateTime dt = DateTime.Now;
-            MessageBox.Show($"Валюты обновлены по состоянию на:\n{dt}");
+            //DateTime dt = DateTime.Now;
+            //MessageBox.Show($"Валюты обновлены по состоянию на:\n{dt}");
         }
 
         /// <summary>Инициализация коллекции валют</summary>        
         public virtual void SetCurrencies()
         {
             ImmutableHashSet<CurrencyDto> currencies = model.GetCurrenciesApp();
-
+            
             int index = 0;
             foreach (CurrencyDto currency in currencies)
             {
@@ -87,14 +82,14 @@ namespace QuotesViewModel
         }
 
         /// <summary>Метод изменения Валют</summary>        
-        public override void CurrenciesUpdateMethod(object Value = null)
+        protected override void CurrenciesUpdateMethod(object Value = null)
         {
             try { model.ExchangeRateUpdate(); }
             catch (Exception ex) { OnException(ex); }            
         }
 
         /// <summary>Метод поиска валюты</summary>        
-        public override void CurrencySearchMethod(object Value = null)
+        protected override void CurrencySearchMethod(object Value = null)
         {
             try
             {

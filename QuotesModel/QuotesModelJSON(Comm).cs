@@ -48,8 +48,8 @@ namespace QuotesModel
                 
                 currenciesJSON = newDictionary.ToDictionary(pair => pair.Key, pair => pair.Value);
                 currenciesDTO.Clear();
-                currenciesDTO.UnionWith(currenciesJSON.Select(json => CreateCurrencyDto(json.Value)).ToImmutableHashSet());                
-
+                currenciesDTO.UnionWith(currenciesJSON.Select(json => CreateCurrencyDto(json.Value)));
+                
                 base.Load(source);
             }
             catch (Exception ex)

@@ -40,10 +40,10 @@ namespace QuotesViewModelBase
         #region Методы для команд
         /// <summary>Метод для вызова из команды поиска</summary>
         /// <param name="Value">Значение привязанного параметра</param>        
-        public virtual void CurrencySearchMethod(object Value = null) { }
-                
+        protected virtual void CurrencySearchMethod(object Value = null) { }
+
         /// <summary>Метод для вызова из команды обновления</summary>
-        public virtual void CurrenciesUpdateMethod(object Value = null) { }
+        protected virtual void CurrenciesUpdateMethod(object Value = null) { }
         #endregion
 
         public event ExceptionHandler ExceptionEvent;

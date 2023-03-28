@@ -1,4 +1,6 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Windows.Documents;
 
 namespace QuotesModelBase
 {
@@ -9,7 +11,7 @@ namespace QuotesModelBase
 
         /// <summary>Вспомогательный метод вызова события после обновления валют</summary>
         /// <param name="currencies">Обновленные валюты</param>
-        protected void OnCurrenciesChanged(ImmutableHashSet<CurrencyDto> currencies) => CurrenciesChanged?.Invoke(this, ActionChanged.Updated, currencies);
+        protected void OnCurrenciesChanged(List<CurrencyDto> currencies) => CurrenciesChanged?.Invoke(this, ActionChanged.Updated, currencies);
 
         public ImmutableHashSet<CurrencyDto> GetCurrenciesApp() => GetCurrencies();
 
