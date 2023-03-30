@@ -3,7 +3,7 @@
 namespace QuotesViewModelBase.InterfacesVM
 {
     /// <summary>Интерфейс элемента Валюты.</summary>
-    public interface ICurrencyVM : IBaseID
+    public interface ICurrencyVM
     {
         string CurrencyKey { get; set; }
         string ID { get; set; }

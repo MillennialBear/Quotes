@@ -1,10 +1,10 @@
 ﻿using Common;
 
 namespace QuotesModelBase
-{
-    public class CurrencyDto : BaseIdDTO
+{    
+    public class CurrencyDto 
     {
-        public new string CurrencyKey { get; }
+        public string CurrencyKey { get; }
 
         public string ID { get; }
 
@@ -21,7 +21,7 @@ namespace QuotesModelBase
         public decimal Previous { get; }
 
         public CurrencyDto(string currencyKey, string id, int numCode, string charCode,
-            decimal nominal, string name, decimal value, decimal previous) : base(currencyKey)
+            decimal nominal, string name, decimal value, decimal previous)
         {
             CurrencyKey = currencyKey;
             ID = id;
