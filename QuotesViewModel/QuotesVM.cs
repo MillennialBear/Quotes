@@ -40,29 +40,11 @@ namespace QuotesViewModel
 
             foreach (var curr in currencies)
             {                
-                CurrencyVM cur = (CurrencyVM)Currencies.FirstOrDefault(d => d.CurrencyKey == curr.CurrencyKey);
-                if(!cur.EqualValues(curr))
-                {
-                    /// Создание новой пары Данные и Валюта для изменения в коллекции
-                    list.Add(curr, cur);
-                }               
-            }
-
-            /// Если в добавляемой коллекции есть элементы
-            if (list.Count > 0)
-                CurrenciesChangedUI(list);            
-        }
-
-        /// <summary>Метод изменяющий валюты в коллекции для представления</summary>
-        /// <param name="currencies">DTO тип с новыми данными и Валюта</param>        
-        private void CurrenciesChangedUI(Dictionary<CurrencyDto, CurrencyVM> currencies)
-        {
-            lock (Currencies)
-                foreach (var currency in currencies)
-                    currency.Value.CopyFromDTO(currency.Key);
-
-            //DateTime dt = DateTime.Now;
-            //MessageBox.Show($"Валюты обновлены по состоянию на:\n{dt}");
+                CurrencyVM? cur = (CurrencyVM?)Currencies.FirstOrDefault(d => d.CurrencyKey == curr.CurrencyKey);
+                if(cur is null || cur.EqualValues(curr))
+                    continue;                
+                cur.CopyFromDTO(curr);
+            }            
         }
 
         /// <summary>Инициализация коллекции валют</summary>        
