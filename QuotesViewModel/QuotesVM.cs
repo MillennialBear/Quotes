@@ -44,7 +44,10 @@ namespace QuotesViewModel
                 if(cur is null || cur.EqualValues(curr))
                     continue;                
                 cur.CopyFromDTO(curr);
-            }            
+            }
+
+            DateTime dt = DateTime.Now;
+            OnInfo(dt);
         }
 
         /// <summary>Инициализация коллекции валют</summary>        

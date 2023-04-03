@@ -25,6 +25,7 @@ namespace Quotes
             model = model ?? throw new ArgumentNullException(nameof(model));
             viewModel = new QuotesVM(model);
             viewModel.ExceptionEvent += ShowException;
+            viewModel.InfoEvent += ShowUpdateInfo;
 
             mainWindow = new Window()
             {                
@@ -60,5 +61,11 @@ namespace Quotes
         /// <param name="exc">Параметры исключения</param>
         private void ShowException(object sender, string nameMetod, Exception exc)
             => MessageBox.Show($"{sender}.{nameMetod}\r\n{exc}\r\n{exc.Message}");
+
+        /// <summary>Метод вывода сообщения об обновлении валют</summary>
+        /// <param name="sender">Источник исключения</param>        
+        /// <param name="dt">Время обновления</param>
+        private void ShowUpdateInfo(object sender, DateTime dt)
+            => MessageBox.Show($"Валюты обновлены по состоянию на:\n{dt}", "Обновление валют");
     }
 }

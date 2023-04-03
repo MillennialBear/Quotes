@@ -47,11 +47,16 @@ namespace QuotesViewModelBase
         #endregion
 
         public event ExceptionHandler ExceptionEvent;
+        public event InfoHandler InfoEvent;
 
         /// <summary>Вспомогательный метод для передачи сообщения об ошибке</summary>
         /// <param name="exc">Параметры ошибки</param>
         /// <param name="nameMetod">Метод отправивший сообщение</param>
         public void OnException(Exception exc, [CallerMemberName] string nameMetod = null)
             => ExceptionEvent?.Invoke(this, nameMetod, exc);
+
+        /// <summary>Вспомогательный метод для передачи сообщения об обновлении валют</summary>       
+        /// <param name="dt">Время обновления</param>
+        public void OnInfo(DateTime dt) => InfoEvent?.Invoke(this, dt);
     }
 }
